@@ -57,7 +57,36 @@ while game == True:
     if usermove == "q":
         print("Thanks for playing!")
         game = False
-    else:
-        print (player['newplayer'].currentroom.name)
-        print(room["outside"].description)
+    elif usermove == "n":
+        if hasattr(player['newplayer'].currentroom, 'n_to'):
+            print("You moved north!")
+            player['newplayer'].currentroom = player['newplayer'].currentroom.n_to
+            print (player['newplayer'].currentroom.name)
+            print(player['newplayer'].currentroom.description)
+        else:
+            print("You can't move that direction!")
+    elif usermove == "s":
+        if hasattr(player['newplayer'].currentroom, 's_to'):
+            print("You moved south!")
+            player['newplayer'].currentroom = player['newplayer'].currentroom.s_to
+            print (player['newplayer'].currentroom.name)
+            print(player['newplayer'].currentroom.description)
+        else:
+            print("You can't move that direction!")
+    elif usermove == "e":
+        if hasattr(player['newplayer'].currentroom, 'e_to'):
+            print("You moved east!")
+            player['newplayer'].currentroom = player['newplayer'].currentroom.e_to
+            print (player['newplayer'].currentroom.name)
+            print(player['newplayer'].currentroom.description)
+        else:
+            print("You can't move that direction!")
+    elif usermove == "w":
+        if hasattr(player['newplayer'].currentroom, 'w_to'):
+            print("You moved west!")
+            player['newplayer'].currentroom = player['newplayer'].currentroom.w_to
+            print (player['newplayer'].currentroom.name)
+            print(player['newplayer'].currentroom.description)
+        else:
+            print("You can't move that direction!")
 

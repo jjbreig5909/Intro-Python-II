@@ -5,21 +5,21 @@ from player import Player, Take
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons",["compass"]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", [""]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", [""]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", ["torch"]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", ["dusty coin"]),
 }
 
 
@@ -40,7 +40,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = {'newplayer': Player('Jeff', room['outside'])}
+player = {'newplayer': Player('Jeff', room['outside'], [""])}
 # Write a loop that:
 #
 # * Prints the current room name
@@ -54,7 +54,7 @@ player = {'newplayer': Player('Jeff', room['outside'])}
 game = True
 i=2
 while game == True:
-    usermove = input("Please input a direction: ")
+    usermove = input("Please input a command: ")
     if usermove == "q":
         print("Thanks for playing!")
         game = False
@@ -90,4 +90,25 @@ while game == True:
             print(player['newplayer'].currentroom.description)
         else:
             print("You can't move that direction!")
+    elif usermove == "take":
+        print("The items are currently in this room are", player['newplayer'].currentroom.roomitems)
+        request = input('What would you like to take?')
+        if request in player['newplayer'].currentroom.roomitems:
+            player['newplayer'].take_item(request)
+            print("You took "+request)
+            player['newplayer'].currentroom.roomitems.remove(request)
+        else:
+            print("That isn't in this room!")
+    elif usermove == "drop":
+        print("You're currently carrying ", player['newplayer'].items)
+        request = input("What would you like to drop?")
+        if request in player['newplayer'].items:
+            player['newplayer'].drop_item(request)
+            player['newplayer'].currentroom.roomitems.append(request)
+            print("You dropped "+request)
+        else:
+            print("You aren't carrying that item!")
+
+
+
 

@@ -53,7 +53,14 @@ player = {'newplayer': Player('Jeff', room['outside'], [""])}
 # If the user enters "q", quit the game.
 game = True
 while game == True:
-    usermove = input("Please input a command: ")
+    command = input("Please input a command: ")
+    usermove = command.split(' ')
+    if len(usermove) == 1:
+        usermove = usermove[0]
+    elif len(usermove) == 2:
+        action= usermove[0]
+        subject = usermove[1]
+
     if usermove == "q":
         print("Thanks for playing!")
         game = False
@@ -89,27 +96,31 @@ while game == True:
             print(player['newplayer'].currentroom.description)
         else:
             print("You can't move that direction!")
-    elif usermove == "take":
-        print("The items are currently in this room are", player['newplayer'].currentroom.roomitems)
-        request = input('What would you like to take?')
-        if request in player['newplayer'].currentroom.roomitems:
-            player['newplayer'].take_item(request)
-            print("You took "+request)
-            player['newplayer'].currentroom.roomitems.remove(request)
-        else:
-            print("That isn't in this room!")
-    elif usermove == "drop":
-        print("You're currently carrying ", player['newplayer'].items)
-        request = input("What would you like to drop?")
-        if request in player['newplayer'].items:
-            player['newplayer'].drop_item(request)
-            player['newplayer'].currentroom.roomitems.append(request)
-            print("You dropped "+request)
-        else:
-            print("You aren't carrying that item!")
     elif usermove == "i":
         if player['newplayer'].items == []:
             print("You aren't carrying anything")
         else:
             print("You're currently carrying ", player['newplayer'].items)
+
+    
+    elif action == "take":
+        print("The items are currently in this room are", player['newplayer'].currentroom.roomitems)
+        if subject in player['newplayer'].currentroom.roomitems:
+            player['newplayer'].take_item(subject)
+            print("You took "+subject)
+            player['newplayer'].currentroom.roomitems.remove(subject)
+        else:
+            print("That isn't in this room!")
+    elif action == "drop":
+        print("You're currently carrying ", player['newplayer'].items)
+        if subject in player['newplayer'].items:
+            player['newplayer'].drop_item(subject)
+            player['newplayer'].currentroom.roomitems.append(subject)
+            print("You dropped "+subject)
+        else:
+            print("You aren't carrying that item!")
+
+    else:
+        print("Sorry, try a different command!")
+
 

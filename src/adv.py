@@ -107,4 +107,9 @@ while game == True:
             print("You dropped "+request)
         else:
             print("You aren't carrying that item!")
+    elif usermove == "i":
+        if player['newplayer'].items == []:
+            print("You aren't carrying anything")
+        else:
+            print("You're currently carrying ", player['newplayer'].items)
 

@@ -52,7 +52,6 @@ player = {'newplayer': Player('Jeff', room['outside'], [""])}
 #
 # If the user enters "q", quit the game.
 game = True
-i=2
 while game == True:
     usermove = input("Please input a command: ")
     if usermove == "q":
@@ -108,7 +107,4 @@ while game == True:
             print("You dropped "+request)
         else:
             print("You aren't carrying that item!")
-
-
-
 

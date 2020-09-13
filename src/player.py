@@ -4,14 +4,12 @@ class Player:
     def __init__(self, name, currentroom, items):
         self.name = name
         self.currentroom = currentroom
-        self.items = items
+        self.items = []
     def take_item(self, item):
-        take = Take(item, self)
-        self.items.append(take)
+        self.items.append(item)
     def drop_item(self, item):
-        take = Drop(item, self)
-        self.items.remove(take)
-        
+        self.items.remove(item)
+
 class Take:
     def __init__(self, item, player):
         self.item = item
